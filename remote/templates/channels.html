@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+  {% for channel in channels %}
+    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+      <div class="thumbnail thumbnail-relative">
+        <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
+        {% if channel.logo %}
+          <img src="{{ channel.logo }}" class="img-responsive">
+        {% else %}
+          <img src="holder.js/500x500?theme=gray&auto=yes&text={{ channel.name }}" class="img-responsive">
+        {% endif %}
+        </a>
+        <div class="caption caption-overlay">
+          <a href="{{ channel.url }}">
+            <strong>{{ channel.name }}</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+{% endblock %}
