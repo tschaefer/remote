@@ -26,6 +26,7 @@ class Importer(object):
         c.name = chan['Name']
         c.stream = chan['Stream']
         c.url = chan['Url']
+        c.logo = chan['Logo']
         self.db.session.add(c)
         try:
             self.db.session.commit()

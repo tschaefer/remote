@@ -7,7 +7,7 @@
       <div class="thumbnail thumbnail-relative">
         <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
         {% if channel.logo %}
-          <img src="{{ channel.logo }}" class="img-responsive">
+          <img src="{{ url_for('static', filename=channel.logo) }}" class="img-responsive">
         {% else %}
           <img src="holder.js/500x500?theme=gray&auto=yes&text={{ channel.name }}" class="img-responsive">
         {% endif %}
