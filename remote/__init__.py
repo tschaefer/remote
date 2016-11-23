@@ -11,7 +11,7 @@ def stype(bytestring):
     return unicode_string
 
 def parse_options():
-    db = os.path.join(os.path.expanduser('~'), 'director.db')
+    db = os.path.join(os.path.expanduser('~'), 'remote.db')
     db = 'sqlite:///%s' % db
 
     parser = argparse.ArgumentParser(description='Remote')
