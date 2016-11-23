@@ -5,16 +5,21 @@
   {% for channel in channels %}
     <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
       <div class="thumbnail thumbnail-relative">
-        <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
         {% if channel.logo %}
-          <img src="{{ url_for('static', filename=channel.logo) }}" class="img-responsive">
+          <a href="{{ url_for('channel', channel_id=channel.pk) }}">
+            <img src="{{ url_for('static', filename=channel.logo) }}" class="img-responsive">
+          </a>
         {% else %}
-          <img src="holder.js/500x500?theme=gray&auto=yes&text={{ channel.name }}" class="img-responsive">
+          <a href="{{ url_for('channel', channel_id=channel.pk) }}">
+            <img src="holder.js/500x500?theme=gray&auto=yes&text={{ channel.name }}" class="img-responsive">
+          </a>
         {% endif %}
-        </a>
         <div class="caption caption-overlay">
           <a href="{{ channel.url }}">
-            <strong>{{ channel.name }}</strong>
+            <span class="text-muted pull-left">{{ channel.name }}</span>
+          </a>
+          <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
+            <span class="text-muted pull-right"><i class="fa fa-tv"></i></span>
           </a>
         </div>
       </div>

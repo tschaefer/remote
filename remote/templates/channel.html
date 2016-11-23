@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+      <div class="thumbnail thumbnail-relative">
+        {% if channel.logo %}
+          <img src="{{ url_for('static', filename=channel.logo) }}" class="img-responsive">
+        {% else %}
+          <img src="holder.js/500x500?theme=gray&auto=yes&text={{ channel.name }}" class="img-responsive">
+        {% endif %}
+        <div class="caption caption-overlay">
+          <a href="{{ channel.url }}">
+            <span class="text-muted pull-left">{{ channel.name }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-4 col-sm-3 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+        {% if feed.img %}
+          <img src="{{ feed.img }}" class="img-responsive" style="margin: 0 auto;">
+        {% else %}
+          <img src="holder.js/640x400?theme=gray&auto=yes&text={{ feed.title }}" class="img-responsive">
+        {% endif %}
+        </div>
+        <div class="panel-footer">
+          <a href="{{ feed.link }}">
+            <span class="text-muted">{{ feed.title }}, {{ feed.date }} Uhr</span>
+          </a>
+          <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
+            <span class="text-muted pull-right"><i class="fa fa-tv"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

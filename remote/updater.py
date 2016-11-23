@@ -5,7 +5,7 @@ from db import Database
 from models import Channel
 from sqlalchemy.exc import IntegrityError
 
-class Importer(object):
+class Updater(object):
 
     def __init__(self, csv=None, database=None, verbose=False):
         self.csv = csv
@@ -21,7 +21,7 @@ class Importer(object):
             for chan in csv.DictReader(f):
                 self.chans.append(chan)
 
-    def insert(self, chan):
+    def update(self, chan):
         c = Channel()
         c.name = chan['Name']
         c.stream = chan['Stream']

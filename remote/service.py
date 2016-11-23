@@ -5,6 +5,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from models import Channel
 from tv import TV
+from feed import Feed
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -35,6 +36,18 @@ def tv_start(channel_id):
     tv.start(channel.name, channel.stream)
 
     return flask.redirect(flask.url_for('channels'))
+
+@app.route('/channel/<int:channel_id>')
+def channel(channel_id):
+    channel = db.session.query(Channel).get(channel_id)
+    if not channel:
+        flask.abort(404)
+
+    url, name = channel.feed.split('|')
+    feed = Feed(url, name)
+    feed.parse()
+
+    return flask.render_template('channel.html', feed=feed, channel=channel)
 
 @app.route('/')
 def channels():

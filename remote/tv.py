@@ -12,7 +12,10 @@ class TV(object):
 
     def _post(self, endpoint, json):
         url = urlparse.urljoin(self.url, endpoint)
-        requests.post(url, json=json)
+        try:
+            requests.post(url, json=json)
+        except:
+            pass
 
     def _json(self, action, data=''):
         return {

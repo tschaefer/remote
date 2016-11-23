@@ -13,3 +13,4 @@ class Channel(Models):
     stream = Column(Unicode, nullable=False)
     url = Column(Unicode, nullable=True)
     logo = Column(Unicode, nullable=True)
+    feed = Column(Unicode, nullable=True)
