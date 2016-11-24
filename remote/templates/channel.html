@@ -26,12 +26,15 @@
         {% endif %}
         </div>
         <div class="panel-footer">
-          <a href="{{ feed.link }}">
-            <span class="text-muted">{{ feed.title }}, {{ feed.date.replace(' - ', ' Uhr - ') }} Uhr</span>
-          </a>
+          <p>
+          <strong class="text-muted">{{ feed.title }}, {{ feed.date.replace(' - ', ' Uhr - ') }} Uhr</strong>
           <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
             <span class="text-muted pull-right"><i class="fa fa-tv"></i></span>
           </a>
+          </p>
+        {% if feed.plot %}
+          <p>{{ feed.plot|safe }}</p>
+        {% endif %}
         </div>
       </div>
     </div>
