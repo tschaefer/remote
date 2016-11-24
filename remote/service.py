@@ -37,6 +37,20 @@ def tv_start(channel_id):
 
     return flask.redirect(flask.url_for('channels'))
 
+@app.route('/guide')
+def guide():
+    channels = db.session.query(Channel).all()
+
+    feeds = []
+    for channel in channels:
+        url, name = channel.feed.split('|')
+        feed = Feed(url, name)
+        feed.parse()
+        feed.channel = channel.name
+        feeds.append(feed)
+
+    return flask.render_template('episodes.html', feeds=feeds)
+
 @app.route('/channel/<int:channel_id>')
 def channel(channel_id):
     channel = db.session.query(Channel).get(channel_id)
@@ -50,6 +64,7 @@ def channel(channel_id):
     return flask.render_template('channel.html', feed=feed, channel=channel)
 
 @app.route('/')
+@app.route('/channels')
 def channels():
     channels = db.session.query(Channel).all()
 

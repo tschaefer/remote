@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Channel</th>
+            <th><i class="fa fa-tv"></i></th>
+            <th>Title</th>
+            <th>Aired</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for feed in feeds %}
+          <tr>
+            <td>{{ feed.channel }}</td>
+            <td>
+              <a href="{{ url_for('tv_start', channel_id=loop.index) }}">
+                <i class="fa fa-tv"></i>
+              </a>
+            </td>
+            <td>
+              <a href="{{ feed.link }}">
+                {{ feed.title }}
+              </a>
+            </td>
+            <td>
+              {{ feed.date.replace(' - ', ' Uhr - ') }} Uhr
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

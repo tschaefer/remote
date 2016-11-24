@@ -27,7 +27,7 @@
         </div>
         <div class="panel-footer">
           <a href="{{ feed.link }}">
-            <span class="text-muted">{{ feed.title }}, {{ feed.date }} Uhr</span>
+            <span class="text-muted">{{ feed.title }}, {{ feed.date.replace(' - ', ' Uhr - ') }} Uhr</span>
           </a>
           <a href="{{ url_for('tv_start', channel_id=channel.pk) }}">
             <span class="text-muted pull-right"><i class="fa fa-tv"></i></span>
