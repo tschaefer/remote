@@ -63,9 +63,12 @@ def channel(channel_id):
 
     return flask.render_template('channel.html', feed=feed, channel=channel)
 
-@app.route('/')
-@app.route('/channels')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/channels', methods=['GET', 'POST'])
 def channels():
+    if flask.request.method == 'POST':
+        tv.start('user', flask.request.form['url'])
+
     channels = db.session.query(Channel).all()
 
     return flask.render_template('channels.html', channels=channels)
