@@ -15,17 +15,17 @@ tv = TV('http://chelsea.local:8090/tv/api/v1.0/')
 @app.route('/tv/stop')
 def tv_stop():
     tv.stop()
-    return flask.redirect(flask.url_for('channels'))
+    return flask.redirect(flask.request.referrer)
 
 @app.route('/tv/pause')
 def tv_pause():
     tv.pause()
-    return flask.redirect(flask.url_for('channels'))
+    return flask.redirect(flask.request.referrer)
 
 @app.route('/tv/play')
 def tv_play():
     tv.play()
-    return flask.redirect(flask.url_for('channels'))
+    return flask.redirect(flask.request.referrer)
 
 @app.route('/tv/start/<int:channel_id>')
 def tv_start(channel_id):
@@ -35,7 +35,7 @@ def tv_start(channel_id):
 
     tv.start(channel.name, channel.stream)
 
-    return flask.redirect(flask.url_for('channels'))
+    return flask.redirect(flask.request.referrer)
 
 @app.route('/guide')
 def guide():
