@@ -47,6 +47,16 @@ def tv_vol_down():
     tv.vol('down')
     return flask.redirect(flask.request.referrer)
 
+@app.route('/tv/seek/fwd')
+def tv_seek_fwd():
+    tv.seek('fwd')
+    return flask.redirect(flask.request.referrer)
+
+@app.route('/tv/seek/back')
+def tv_seek_back():
+    tv.seek('back')
+    return flask.redirect(flask.request.referrer)
+
 @app.route('/guide')
 def guide():
     channels = db.session.query(Channel).all()
