@@ -45,3 +45,7 @@ class TV(object):
     def pause(self):
         json = self._json('pause')
         self._post('playback', json)
+
+    def vol(self, action):
+        json = self._json(action)
+        self._post('volume', json)

@@ -37,6 +37,16 @@ def tv_start(channel_id):
 
     return flask.redirect(flask.request.referrer)
 
+@app.route('/tv/vol/up')
+def tv_vol_up():
+    tv.vol('up')
+    return flask.redirect(flask.request.referrer)
+
+@app.route('/tv/vol/down')
+def tv_vol_down():
+    tv.vol('down')
+    return flask.redirect(flask.request.referrer)
+
 @app.route('/guide')
 def guide():
     channels = db.session.query(Channel).all()
