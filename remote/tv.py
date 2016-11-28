@@ -19,8 +19,9 @@ class TV(object):
 
     def _json(self, action, data=''):
         return {
-            'action': action,
-            'data': data
+            'action':  action,
+            'data':    data,
+            'options': 'live'
         }
 
     def start(self, chan, stream):
