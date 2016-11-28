@@ -49,7 +49,7 @@ def guide():
         feed.channel = channel.name
         feeds.append(feed)
 
-    return flask.render_template('episodes.html', feeds=feeds)
+    return flask.render_template('guide.html', feeds=feeds)
 
 @app.route('/channel/<int:channel_id>')
 def channel(channel_id):
