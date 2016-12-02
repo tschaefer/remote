@@ -49,7 +49,3 @@ class TV(object):
     def vol(self, action):
         json = self._json(action)
         self._post('volume', json)
-
-    def seek(self, action):
-        json = self._json(action)
-        self._post('seek', json)

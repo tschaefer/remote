@@ -47,16 +47,6 @@ def tv_vol_down():
     tv.vol('down')
     return flask.redirect(flask.request.referrer)
 
-@app.route('/tv/seek/fwd')
-def tv_seek_fwd():
-    tv.seek('fwd')
-    return flask.redirect(flask.request.referrer)
-
-@app.route('/tv/seek/back')
-def tv_seek_back():
-    tv.seek('back')
-    return flask.redirect(flask.request.referrer)
-
 @app.route('/guide')
 def guide():
     channels = db.session.query(Channel).all()
@@ -83,12 +73,9 @@ def channel(channel_id):
 
     return flask.render_template('channel.html', feed=feed, channel=channel)
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/channels', methods=['GET', 'POST'])
+@app.route('/')
+@app.route('/channels')
 def channels():
-    if flask.request.method == 'POST':
-        tv.start('user', flask.request.form['url'])
-
     channels = db.session.query(Channel).all()
 
     return flask.render_template('channels.html', channels=channels)

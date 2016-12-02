@@ -26,7 +26,7 @@ class Feed(object):
             _, self.img = raw.group(0).split('"')
         self.plot = None
         if self.entry['summary'].find('<br />') != -1:
-            self.plot = self.entry['summary'].split('<br />', 1)[1]
+            _, self.plot = self.entry['summary'].split('<br />', 1)
         self.link = self.entry['link']
 
     def parse(self):
