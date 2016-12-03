@@ -15,16 +15,18 @@
         <tbody>
         {% for feed in feeds %}
           <tr>
-            <td>{{ feed.channel }}</td>
+            <td>
+              <a href="{{ url_for('channel', channel_id=loop.index) }}">
+                {{ feed.channel }}
+              </a>
+            </td>
             <td>
               <a href="{{ url_for('tv_start', channel_id=loop.index) }}">
                 <i class="fa fa-tv"></i>
               </a>
             </td>
             <td>
-              <a href="{{ feed.link }}">
-                {{ feed.title }}
-              </a>
+              {{ feed.title }}
             </td>
             <td>
               {{ feed.date.replace(' - ', ' Uhr - ') }} Uhr
