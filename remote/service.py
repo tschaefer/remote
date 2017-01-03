@@ -3,6 +3,7 @@
 import flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import tinyurl
 from models import Channel
 from tv import TV
 from feed import Feed
@@ -33,7 +34,7 @@ def tv_start(channel_id):
     if not channel:
         flask.abort(404)
 
-    tv.start(channel.name, channel.stream)
+    tv.start(channel.name, channel.stream, 'live')
 
     return flask.redirect(flask.request.referrer)
 
@@ -46,6 +47,15 @@ def tv_vol_up():
 def tv_vol_down():
     tv.vol('down')
     return flask.redirect(flask.request.referrer)
+
+@app.route('/player', methods=['GET', 'POST'])
+def player():
+    if flask.request.method == 'POST':
+        url = unicode(flask.request.form['url'])
+        shorturl = tinyurl.create_one(url)
+        tv.start('URL', shorturl, 'local')
+
+    return flask.render_template('player.html')
 
 @app.route('/guide')
 def guide():
@@ -76,7 +86,7 @@ def channel(channel_id):
 @app.route('/')
 @app.route('/channels')
 def channels():
-    channels = db.session.query(Channel).all()
+    channels = db.session.query(Channel).order_by(Channel.name)
 
     return flask.render_template('channels.html', channels=channels)
 
