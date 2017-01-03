@@ -17,6 +17,13 @@ class Feed(object):
                 self.entry = entry
 
     def _elements(self):
+        if not self.entry:
+            self.title = ''
+            self.date = ''
+            self.img = ''
+            self.plot = ''
+            self.link = ''
+            return
         _, self.title = self.entry['title'].split(': ', 1)
         raw = re.search('[0-9]{1,2}:[0-9]{1,2} - [0-9]{1,2}:[0-9]{1,2}', self.entry['summary'])
         self.date = raw.group(0)
