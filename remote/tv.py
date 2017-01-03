@@ -17,18 +17,18 @@ class TV(object):
         except:
             pass
 
-    def _json(self, action, data=''):
+    def _json(self, action, data='', options='live'):
         return {
             'action':  action,
             'data':    data,
-            'options': 'live'
+            'options': options
         }
 
-    def start(self, chan, stream):
+    def start(self, chan, stream, modus):
         self.chan = chan
         self.stream = stream
 
-        json = self._json('start', data=stream)
+        json = self._json('start', data=stream, options=modus)
         self._post('playback', json)
 
     def stop(self):
