@@ -1,2 +1,2 @@
-recursive-include director/templates *
-recursive-include director/static *
+recursive-include remote/templates *
+recursive-include remote/static *
